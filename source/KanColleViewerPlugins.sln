@@ -3,8 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KanColleViewer", "KanColleViewer", "{36647E5A-F4F0-4B77-ACD3-24A6A7EB7DBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "KanColleViewer\source\Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanburaTimerPlugin", "KanburaTimerPlugin\KanburaTimerPlugin.csproj", "{56CAD997-C234-4851-BA1C-2DECB339359C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release (beta)|Any CPU = Release (beta)|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.Build.0 = Release (beta)|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56CAD997-C234-4851-BA1C-2DECB339359C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5F0111F-3F68-4A74-BB20-BB762564D080} = {36647E5A-F4F0-4B77-ACD3-24A6A7EB7DBE}
 	EndGlobalSection
 EndGlobal
