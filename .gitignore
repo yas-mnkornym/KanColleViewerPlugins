@@ -197,4 +197,5 @@ FakesAssemblies/
 
 
 # KanColleViewer solution
-KanColleViewer/
+KanColleViewer/*
+!KanColleViewer/.gitkeep

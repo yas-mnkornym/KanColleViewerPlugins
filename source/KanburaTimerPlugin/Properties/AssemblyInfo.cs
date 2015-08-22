@@ -7,12 +7,12 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("KanburaTimerPlugin")]
+[assembly: AssemblyTitle("艦ぶらたいまープラグイン for 提督業も忙しい！")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Studiotaiha")]
+[assembly: AssemblyCompany("スタジオ大破")]
 [assembly: AssemblyProduct("KanburaTimerPlugin")]
-[assembly: AssemblyCopyright("Copyright © Studiotaiha 2015")]
+[assembly: AssemblyCopyright("Copyright © スタジオ大破 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.3.0")]
+[assembly: AssemblyFileVersion("0.0.3.0")]

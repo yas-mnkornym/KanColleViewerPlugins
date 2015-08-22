@@ -37,12 +37,24 @@
       <HintPath>..\packages\KanColleViewer.Composition.1.2.0.0\lib\net45\KanColleViewer.Composition.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="KanColleViewer.PluginAnalyzer, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\KanColleViewer.PluginAnalyzer.1.0.1.0\lib\net45\KanColleViewer.PluginAnalyzer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="KanColleWrapper, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\KanColleWrapper.1.2.2.0\lib\net45\KanColleWrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Livet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nekoxy, Version=1.2.0.13, Culture=neutral, processorArchitecture=MSIL">
@@ -72,6 +84,10 @@
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,6 +96,14 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TaihaToolkit.Core, Version=1.0.0.30579, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TaihaToolkit.Core.1.0.0.30579\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\TaihaToolkit.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TaihaToolkit.WPF, Version=1.0.0.30580, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TaihaToolkit.WPF.1.0.0.30580\lib\net45\TaihaToolkit.WPF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TrotiNet, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nekoxy.1.2.0.13\lib\net45\TrotiNet.dll</HintPath>
@@ -90,6 +114,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\PluginInfo.cs" />
+    <Compile Include="KanburaTimerPlugin.cs" />
+    <Compile Include="Models\KanburaTimerSender.cs" />
+    <Compile Include="Models\KanburaTimerUserInfo.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +133,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\KanburaTimerToolViewModel.cs" />
+    <Compile Include="Views\Converters\BoolValueConverter.cs" />
+    <Compile Include="Views\KanburaTimerToolView.xaml.cs">
+      <DependentUpon>KanburaTimerToolView.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -114,7 +149,38 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Kanbura\Kanbura\KanburaTimerClient\KanburaTimerClient.csproj">
+      <Project>{3a6a2f82-c034-4366-ad4f-1f30b84a8f40}</Project>
+      <Name>KanburaTimerClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KanColleViewer\source\Grabacr07.KanColleViewer\KanColleViewer.csproj">
+      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
+      <Name>KanColleViewer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\KanburaTimerToolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\KanColleViewer.PluginAnalyzer.1.0.1.0\analyzers\KanColleViewer.Composition.dll" />
+    <Analyzer Include="..\packages\KanColleViewer.PluginAnalyzer.1.0.1.0\analyzers\KanColleViewer.PluginAnalyzer.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins"
+copy /Y "$(TargetPath)" "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins\"
+copy /Y "$(TargetDir)KanburaTimerClient.dll" "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins\"
+copy /Y "$(TargetDir)RestSharp.dll" "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins\"
+copy /Y "$(TargetDir)TaihaToolkit.Core.dll" "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins\"
+copy /Y "$(TargetDir)TaihaToolkit.WPF.dll" "$(SolutionDir)KanColleViewer\source\Grabacr07.KanColleViewer\bin\$(ConfigurationName)\plugins\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
