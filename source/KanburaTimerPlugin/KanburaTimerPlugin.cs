@@ -89,6 +89,8 @@ namespace Studiotaiha.KanburaTimerPlugin
 					KanColleClient.Current,
 					settings_,
 					dispatcher);
+
+				viewModel_.StartMonitoring();
 			}
 		}
 
@@ -101,6 +103,10 @@ namespace Studiotaiha.KanburaTimerPlugin
 				if (expoter_ != null) {
 					expoter_.Dispose();
 					expoter_ = null;
+				}
+
+				if (viewModel_ != null) {
+					viewModel_.StopMonitoring();
 				}
 			}
 			isDisposed_ = true;

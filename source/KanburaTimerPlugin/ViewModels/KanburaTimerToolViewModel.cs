@@ -52,8 +52,6 @@ namespace Studiotaiha.KanburaTimerPlugin.ViewModels
 		/// </summary>
 		public void StartMonitoring()
 		{
-
-			kanColleClient_.Homeport.Admiral.PropertyChanged += Admiral_PropertyChanged;
 			kanColleClient_.Homeport.PropertyChanged += Admiral_PropertyChanged;
 		}
 
@@ -62,7 +60,6 @@ namespace Studiotaiha.KanburaTimerPlugin.ViewModels
 		/// </summary>
 		public void StopMonitoring()
 		{
-			kanColleClient_.Homeport.Admiral.PropertyChanged -= Admiral_PropertyChanged;
 			kanColleClient_.Homeport.PropertyChanged -= Admiral_PropertyChanged;
 		}
 		#endregion
