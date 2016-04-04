@@ -1,0 +1,185 @@
+﻿<UserControl x:Class="Studiotaiha.TweetPlugin.Views.TweetControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Studiotaiha.TweetPlugin.Views"
+             xmlns:conv="clr-namespace:Studiotaiha.TweetPlugin.Views.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+	<UserControl.Resources>
+		<conv:ReverseBoolConverter x:Key="ReverseBoolConverter" />
+		<conv:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+		<conv:NullVisibilityConverter x:Key="NullVisibleConverter" NullVisibility="Visible" NotNullVisibility="Collapsed" />
+		<conv:NullVisibilityConverter x:Key="NullCollapsedConverter" />
+	</UserControl.Resources>
+    <Grid>
+		<!-- ツイート用コントロール -->
+		<DockPanel HorizontalAlignment="Stretch"
+				   VerticalAlignment="Stretch"
+				   Visibility="{Binding Path=Tweeter, Mode=OneWay, Converter={StaticResource NullCollapsedConverter}}"
+				   IsEnabled="{Binding Path=IsTweeting, Mode=OneWay, Converter={StaticResource ReverseBoolConverter}}"
+				   >
+			<Grid DockPanel.Dock="Bottom"
+			  Margin="0,5,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="200" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Column="0">
+					<DockPanel Width="280"
+							   HorizontalAlignment="Left">
+						<StackPanel DockPanel.Dock="Right"
+								Orientation="Horizontal"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="現在の文字数です。&#xa;140文字までツイートできます。">
+							<TextBlock Text="{Binding TextLength}" />
+							<TextBlock Text="/140" />
+						</StackPanel>
+						<CheckBox Content="ハッシュタグ自動付加" DockPanel.Dock="Left"
+							  IsChecked="{Binding Path=Settings.AppendHashTag,Mode=TwoWay}"
+											ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+								  ToolTip="有効にすると、ツイートの末尾に指定したハッシュタグを自動で追記します。"/>
+						<CheckBox Content="MSKR" DockPanel.Dock="Left"
+								  Margin="10,0,0,0"
+							  IsChecked="{Binding Path=Settings.UseMisakuraTweet,Mode=TwoWay}"
+											ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+								  ToolTip="みしゃくらごれちゅぶやきましゅぅぅぅ"/>
+					</DockPanel>
+					<DockPanel Margin="0,5,0,0"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="自動付加するハッシュタグを指定します。&#xa;(「ハッシュタグ自動付加」が有効の時のみ付加されます。">
+						<TextBlock DockPanel.Dock="Left"
+						   Text="タグ:"
+								   VerticalAlignment="Center"/>
+						<TextBox DockPanel.Dock="Left"
+						 AcceptsTab="False"
+						 AcceptsReturn="False"
+						 Text="{Binding Path=Settings.HashTag,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+						 />
+					</DockPanel>
+				</StackPanel>
+				<Border Grid.Column="1" 
+					Margin="5,0,0,0"
+					BorderThickness="2"
+					BorderBrush="White"
+						ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+						ToolTip="ツイートします。">
+					<Button Content="ツイート"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						FontSize="20"
+						Command="{Binding TweetCommand}"/>
+				</Border>
+			</Grid>
+
+
+			<Grid DockPanel.Dock="Top"
+			  HorizontalAlignment="Stretch">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="280" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBox Grid.Column="0"
+					 AcceptsReturn="True"
+					 AcceptsTab="True"
+					 TextWrapping="Wrap"
+					 VerticalScrollBarVisibility="Auto"
+					 HorizontalScrollBarVisibility="Disabled"
+					 Text="{Binding Path=TweetText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="ツイートの本文を入力します。&#xa;キーボードの Ctrl + Enter でつぶやけます。">
+					<TextBox.InputBindings>
+						<KeyBinding Modifiers="Control" Key="Enter" Command="{Binding TweetCommand}" />
+					</TextBox.InputBindings>
+				</TextBox>
+				<DockPanel Grid.Column="1"
+					   Margin="5,0,0,0">
+					<StackPanel DockPanel.Dock="Top"
+							Orientation="Horizontal"
+							HorizontalAlignment="Center">
+						<CheckBox Content="画像を添付"
+							  IsChecked="{Binding Path=Settings.AppendPicture,Mode=TwoWay}"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="チェックすると、選択されている画像をツイートに添付します。"/>
+
+						<CheckBox Content="常に最新の画像"
+								  Margin="10,0,0,0"
+								  IsChecked="{Binding Path=Settings.AlwaysUseLatestPicture ,Mode=TwoWay}"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="チェックすると、新しいスクリーンショットが撮影された時に画像を自動で切り替えます。"/>
+					</StackPanel>
+
+					<UniformGrid DockPanel.Dock="Bottom"
+							 Columns="3">
+						<Button Content="&lt;&lt;"
+							Command="{Binding PreviousCaptureCommand}"
+							ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}">
+							<Button.ToolTip>
+								<TextBlock Text="前の画像" />
+							</Button.ToolTip>
+						</Button>
+						<Button Content="最新"
+							Command="{Binding LatestCaptureCommand}"
+							ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}">
+							<Button.ToolTip>
+								<TextBlock Text="最新の画像" />
+							</Button.ToolTip>
+						</Button>
+						<Button Content="&gt;&gt;"
+							Command="{Binding NextCaptureCommand}"
+						ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}">
+							<Button.ToolTip>
+								<TextBlock Text="次の画像" />
+							</Button.ToolTip>
+						</Button>
+					</UniformGrid>
+
+					<DockPanel DockPanel.Dock="Bottom">
+						<TextBlock Text="{Binding ImageFileName}"
+								   HorizontalAlignment="Left"
+								   DockPanel.Dock="Top"/>
+						<Viewbox DockPanel.Dock="Bottom"
+					 HorizontalAlignment="Stretch"
+					 VerticalAlignment="Stretch"
+					 Stretch="Uniform">
+							<Border Width="800" Height="480"
+							BorderThickness="1"
+							BorderBrush="White"
+								>
+								<Image Source="{Binding TweetImage}"
+									   Stretch="Uniform"
+									   HorizontalAlignment="Stretch"
+									   VerticalAlignment="Stretch"
+							   ToolTipService.IsEnabled="{Binding Settings.ToolTipEnabled, Mode=OneWay}"
+							   ToolTip="現在選択されている画像です。&#xa;「画像を添付」をオンにすると、この画像がツイートに添付されます。"/>
+							</Border>
+						</Viewbox>
+					</DockPanel>
+				</DockPanel>
+			</Grid>
+		</DockPanel>
+		
+		<!-- つぶやいていますコントロール -->
+		<Grid Visibility="{Binding Path=IsTweeting, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}"
+			  Background="#AA333333">
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="つぶやいています..."
+					   FontSize="35"
+					   FontWeight="Bold" />
+		</Grid>
+
+		<!-- 未認証 -->
+		<Grid Visibility="{Binding Path=Tweeter, Mode=OneWay, Converter={StaticResource NullVisibleConverter}}"
+			  Background="#FF333333">
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="twitterが未認証です。下部の設定を開いてtwitterの認証を行ってください。"
+					   TextWrapping="WrapWithOverflow"
+					   FontSize="35"
+					   FontWeight="Bold" />
+		</Grid>
+    </Grid>
+</UserControl>
